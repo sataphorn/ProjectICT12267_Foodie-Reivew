@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกี่ยวกับเรา - Foodie Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
+    <style>
+        /* โค้ดบังคับให้เรียง 4 คนใน 1 แถว */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        /* ถ้าเป็นหน้าจอไอแพด ให้เรียง 2 คน */
+        @media (max-width: 900px) {
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        /* ถ้าเป็นหน้าจอมือถือ ให้เรียง 1 คน */
+        @media (max-width: 600px) {
+            .team-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">Foodie Review</a>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">☰</label>
+    <nav>
+        <ul>
+            <li><a href="index.html">หน้าหลัก</a></li>
+            <li><a href="recommend.html">ร้านแนะนำ</a></li>
+            <li><a href="about.html" class="active">เกี่ยวกับเรา</a></li>
+        </ul>
+    </nav>
+    <div class="dark-mode-container">
+        <input type="checkbox" id="darkmode-toggle">
+        <label for="darkmode-toggle" class="dark-label">
+            <span class="sun"></span><span class="moon"></span>
+        </label>
+    </div>
+</header>
+
+<section class="about-hero">
+    <h1>เบื้องหลังความอร่อยของ Foodie Review</h1>
+    <p>รวมพลังคนรักของกิน เพื่อสายกินโดยเฉพาะ!</p>
+</section>
+
+<main class="container about-container">
+
+    <div class="about-story">
+        <div class="story-text" style="width: 100%;">
+            <h2 style="text-align: center;">ทีมงาน Foodie Review 🍽️</h2>
+            <p style="text-align: center;">จุดเริ่มต้นของเว็บนี้เกิดจากความตั้งใจที่อยากสร้างพื้นที่รวมร้านอาหาร ของอร่อย เข้าถึงง่าย มาฝากทุกคนในพื้นที่ใกล้เคียง หรือคนที่ไม่เคยลอง</p>
+
+            <div class="team-grid">
+                
+                <div style="background: var(--bg-main); padding: 20px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border);">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-light); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem;">👨‍💻</div>
+                    <h3 style="color: var(--primary); margin-bottom: 5px; font-size: 1rem;">ศตพร พิณสายเหม</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">68063450</p>
+                </div>
+
+                <div style="background: var(--bg-main); padding: 20px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border);">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-light); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem;">👨‍💻</div>
+                    <h3 style="color: var(--primary); margin-bottom: 5px; font-size: 1rem;">ณัฐพล มิ่งมา</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">68011758</p>
+                </div>
+
+                <div style="background: var(--bg-main); padding: 20px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border);">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-light); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem;">👩‍💻</div>
+                    <h3 style="color: var(--primary); margin-bottom: 5px; font-size: 1rem;">วรภร สุขอร่าม</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">68073536</p>
+                </div>
+
+                <div style="background: var(--bg-main); padding: 20px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border);">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-light); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem;">👩‍💻</div>
+                    <h3 style="color: var(--primary); margin-bottom: 5px; font-size: 1rem;">ลักษมณ สหัสทันต์ธนัท</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">68023916</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px">
+        <div class="sidebar-box" style="text-align:center">
+            <div style="font-size:2rem;font-weight:700;color:var(--primary)">20+</div>
+            <div style="font-size:0.85rem;color:var(--text-muted)">ร้านที่รีวิวแล้ว</div>
+        </div>
+        <div class="sidebar-box" style="text-align:center">
+            <div style="font-size:2rem;font-weight:700;color:var(--primary)">500+</div>
+            <div style="font-size:0.85rem;color:var(--text-muted)">ผู้เยี่ยมชมต่อเดือน</div>
+        </div>
+        <div class="sidebar-box" style="text-align:center">
+            <div style="font-size:2rem;font-weight:700;color:var(--primary)">4.8 ⭐</div>
+            <div style="font-size:0.85rem;color:var(--text-muted)">คะแนนเฉลี่ยร้าน</div>
+        </div>
+    </div>
+
+    <div class="mission-grid">
+        <div class="mission-card">
+            <div class="m-icon">🎯</div>
+            <h4>เป้าหมาย</h4>
+            <p>เป็นแหล่งรวมร้านเด็ดที่เชื่อถือได้ที่สุด รีวิวจริง ไปจริง กินจริง</p>
+        </div>
+        <div class="mission-card">
+            <div class="m-icon">💻</div>
+            <h4>เทคโนโลยี</h4>
+            <p>สร้างด้วย HTML / CSS / JS </p>
+        </div>
+        <div class="mission-card">
+            <div class="m-icon">❤️</div>
+            <h4>ความตั้งใจ</h4>
+            <p>อยากให้ทุกคนมีความสุขกับมื้ออาหารในทุกๆ วัน ไม่ว่าจะงบน้อยหรืองบเยอะ</p>
+        </div>
+    </div>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Foodie Review</h3>
+            <p>รวมรีวิวร้านอาหารเด็ดๆ โดยทีมงาน Foodie Review</p>
+        </div>
+        <div class="footer-section">
+            <h4>ติดตามเรา</h4>
+            <div class="social-links">
+                <a href="#">📘 Facebook</a>
+                <a href="#">📸 Instagram</a>
+                <a href="#">🎵 TikTok</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>ติดต่องาน</h4>
+            <p>📧 contact@FoodieReview.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Foodie Review.
+    </div>
+</footer>
+
+<script>
+const toggle = document.getElementById('darkmode-toggle');
+const saved = localStorage.getItem('theme');
+if (saved === 'dark') { document.documentElement.setAttribute('data-theme','dark'); toggle.checked = true; }
+toggle.addEventListener('change', () => {
+    const t = toggle.checked ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem('theme', t);
+});
+</script>
+
+</body>
+</html>

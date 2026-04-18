@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร้านอาหารแนะนำ - Foodie Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="recommend.css">
+    <style>
+        /* สไตล์สำหรับกล่อง Pop-up แนะนำร้าน */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            backdrop-filter: blur(5px);
+            align-items: center; 
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+        .close-modal:hover { color: var(--primary); }
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            font-family: 'Kanit', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            background: var(--bg-main);
+            color: var(--text-main);
+            transition: border-color var(--transition);
+        }
+        .modal-input:focus { border-color: var(--primary); }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">Foodie Review</a>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">☰</label>
+    <nav>
+        <ul>
+            <li><a href="index.html">หน้าหลัก</a></li>
+            <li><a href="recommend.html" class="active">ร้านแนะนำ</a></li>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+        </ul>
+    </nav>
+    <div class="dark-mode-container">
+        <input type="checkbox" id="darkmode-toggle">
+        <label for="darkmode-toggle" class="dark-label"><span class="sun"></span><span class="moon"></span></label>
+    </div>
+</header>
+
+<section class="page-header">
+    <h1>คัดมาแล้วว่า "ต้องโดน" 🏆</h1>
+    <p>จัดหมวดหมู่ร้านเด็ดที่ทีมงาน Foodie Review ขอเรคคอมเมนต์ว่าห้ามพลาด</p>
+</section>
+
+<main class="container">
+    <div class="content-left">
+        
+        <div class="filter-bar sticky-nav">
+            <div class="filter-actions">
+                <span class="sort-label"></span>
+                <div class="sort-buttons">
+                    <a href="#trending" class="sort-btn active">🔥 มาแรงที่สุด</a>
+                    <a href="#cafe-lover" class="sort-btn">☕ คาเฟ่สายถ่ายรูป</a>
+                    <a href="#buffet-worth" class="sort-btn">🥘 บุฟเฟต์สุดคุ้ม</a>
+                </div>
+            </div>
+        </div>
+
+        <section id="trending" class="recommend-block">
+            <div class="block-header">
+                <h2>🔥 มาแรงที่สุด (Top Trending)</h2>
+                <p>ร้านฮิตกระแสแรงที่ใครๆ ก็ต้องไปเช็คอินช่วงนี้ ทั้งร้านดังและร้านลับ!</p>
+            </div>
+            <div class="card-grid">
+                <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">ร้านลับ / อาหารไทย</span>
+                        <img src="https://scontent.fbkk29-9.fna.fbcdn.net/v/t39.30808-6/362653571_102415899607620_8242653945166417452_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=gzuBYNTV5sQQ7kNvwF01sKt&_nc_oc=AdpV2kCtEja2ZX5fG1Hi_yw_kSB-ImK8enXLvad_Ks2-ZuyfaXoWKHMIBODmFvhS_E0&_nc_zt=23&_nc_ht=scontent.fbkk29-9.fna&_nc_gid=tQa-CwHo84gUXigdFwgV7Q&_nc_ss=7a389&oh=00_Af25S3W0bd8rbG5LpULm1W9_VcvbV9BYeVpP3r9T6Bls3g&oe=69E819DB" alt="ร้านแจ่ม BKK" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>ร้านแจ่ม BKK (Jamn_Bkk)</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(112 รีวิว)</span></p>
+                        <p class="location">📍 ถนนจันทน์ 43 · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>250฿-500฿</strong></span>
+                            <a href="Jamn_Bkk.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                 </article>
+
+                 <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">อิซากายะร้านลับ</span>
+                        <img src="https://scontent.fbkk29-7.fna.fbcdn.net/v/t39.30808-6/302692871_982728535945740_6640947846297588745_n.png?_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NjAGeODaFtcQ7kNvwG57uaM&_nc_oc=AdpfYDBwHY1gIyQvH5L95MU4orVeP9DMTF05JOnTaGJfKdbNJoLHaoGAtu9aZATCLAI&_nc_zt=23&_nc_ht=scontent.fbkk29-7.fna&_nc_gid=d6hQrqXK9pcYaSoAJyJXHg&_nc_ss=7a389&oh=00_Af0I2zTnQYluN1cppFCy6ySJ_ypyzAaLLXPDVGlZsm0j2w&oe=69E8295D" alt="Kikyo Yakitori" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>桔梗 Kikyo Yakitori</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(458 รีวิว)</span></p>
+                        <p class="location">📍 ศาลาแดง · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>250฿-500฿</strong></span>
+                            <a href="Kikyo.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                 </article>
+
+                 <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">บิสโทรริมน้ำ</span>
+                        <img src="https://scontent.fbkk29-1.fna.fbcdn.net/v/t39.30808-6/585890831_25464022279884027_6151814967701224976_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=Dtn6PQx7maEQ7kNvwHBhuXM&_nc_oc=AdroS1kWFeICeRghz8xu_1BgDRMjRTnYGBV92XDxIYL21vtcM5jInT1ScIOMjbMUw9I&_nc_zt=23&_nc_ht=scontent.fbkk29-1.fna&_nc_gid=ku0wihLvjc7shyfyPGY0FA&_nc_ss=7a389&oh=00_Af23pIL5Wrqwyi2RgUUPivNJu_FD7QNJPcyiLf04F6PBvw&oe=69E812E0" alt="Hidden Bangkok Bistro" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>Hidden Bangkok Bistro</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(305 รีวิว)</span></p>
+                        <p class="location">📍 เทอดไท 26 · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>100฿-200฿</strong></span>
+                            <a href="HiddenBangkok.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                 </article>
+
+                 <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">ร้านอาหารไทยโบราณ</span>
+                        <img src="https://scontent.fbkk29-5.fna.fbcdn.net/v/t39.30808-6/448502170_122118697544310086_5235493636464887491_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=d7Yh-GXY8X8Q7kNvwEWtv0D&_nc_oc=Adr1pghQkRgrkiAtRzCz23YP7shcabSvEm0yCbzQySS4Z40PYSolVERMHA6WeFzThTg&_nc_zt=23&_nc_ht=scontent.fbkk29-5.fna&_nc_gid=ZbTiPkxVNMtiJV-YGmknPQ&_nc_ss=7a389&oh=00_Af3HeyWWCc2IHFm99MYN2GQqkOf1E3KrWLk9CIlrv5naXA&oe=69E82A10" alt="KLER เกลอ" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>KLER (เกลอ)</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(253 รีวิว)</span></p>
+                        <p class="location">📍 สุขุมวิท 101/1 · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>150฿-450฿</strong></span>
+                            <a href="KLER.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                 </article>
+
+                 <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">สายแซ่บ</span>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAE0HxxMmPSFogQ75Ca-ciyKDvb1hp3x-eFZq5FEBgvJQ3RL1EPHHIVemA3cR1aP2_1ioWYbVDa7jTVGHq32dTZvYtrQUTYIJQyj9DasnD5xg479oaZ4OXYEQYBtC42MJFAfMlPXd3-N7txZ=s1360-w1360-h1020" alt="ลาบติดล้อ" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>ลาบติดล้อ</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(246 รีวิว)</span></p>
+                        <p class="location">📍 ตลิ่งชัน · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>60฿-250฿</strong></span>
+                            <a href="LabTidLor.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                 </article>
+
+                <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">ร้านอาหาร</span>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwerdo3QRyUFWocUEZPmf-q0G3uXMGEOdNUpZ_qnIlyJQSnnPQpmX-xQjKwkxY_hCEIXNkTQY1xPSqR5PA7LBfL7Zg0taeOXAL7n_Cv3peZykYzS1r_cpImOLyvz-ghG_Hv69Wmg5HETYT3Y=s1360-w1360-h1020-rw" alt="ครัวสมร" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>ครัวสมร</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(1.4k รีวิว)</span></p>
+                        <p class="location">📍 กาญจนาภิเษก · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>200฿-400฿</strong></span>
+                            <a href="kruasamorn.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                 </article>
+
+                 <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">ร้านอาหาร / ซาซิมิ</span>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAGvTLV_OCD6jQK6019Umefq-71l0qUmc4oUXFHqWd1CXfHQbgxVIi2S_JYbUhkRfkGnfgI1GaQO4X6tMiu36_o-YaHD_nuby6qAHIReoNWmpaBS7MYoqS6qu4Rua4CPXGN7JU722A=s1360-w1360-h1020" alt="เหมย หมึกเป็นซาซิมิ" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>เหมย หมึกเป็นซาซิมิ</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(2.7k รีวิว)</span></p>
+                        <p class="location">📍 กาญจนาภิเษก · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>400฿-600฿</strong></span>
+                            <a href="sashimi.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">ร้านลับ</span>
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipO9ZsV_dHiQ-8BtYkPPjxz61HYIfFU-iRuYyFa6=s1360-w1360-h1020" alt="ลุง แจ๊คโอชา" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>ลุง แจ๊คโอชา</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(132 รีวิว)</span></p>
+                        <p class="location">📍 บางแคซอย 10 · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>60฿-150฿</strong></span>
+                            <a href="UncleJack.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card"> 
+                    <div class="card-img-container">
+                        <span class="category-badge">สายแซ่บพรีเมียม</span>
+                        <img src="https://scontent.fbkk29-4.fna.fbcdn.net/v/t39.30808-6/460632681_122103135602524422_7882634592814109045_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=Ta9thYoyKfAQ7kNvwFnYeQG&_nc_oc=AdpHW7akdyeHAQK-vD2EK5zJO4au2NfFyR6oPB4WHNaU0LbVXctOWPXSs_WRAAl_ayM&_nc_zt=23&_nc_ht=scontent.fbkk29-4.fna&_nc_gid=0W8Jo_WI29djRmROzLLcSw&_nc_ss=7a389&oh=00_Af0erpr5GYZe4cFP1hQHX1-GsPZtfX7TnMr5dXjYwRdq0w&oe=69E829A9" alt="พาข้าว บรรทัดทอง" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>พาข้าว บรรทัดทอง</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(875 รีวิว)</span></p>
+                        <p class="location">📍 บรรทัดทอง · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>150฿-450฿</strong></span>
+                            <a href="PaKhao.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">ร้านอาหาร / สุกี้ยากี้</span>
+                        <img src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/263407349_120247077138262_6530553232011222988_n.png?_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=UjkZh8Wyv4YQ7kNvwFZaaX3&_nc_oc=AdoTTzo0rA31rqfstl12f5W1nuEpQb4wU9-JCqCH6jDqAPWe2cLWuNPEB3KNDp9tHF4&_nc_zt=23&_nc_ht=scontent.fbkk22-2.fna&_nc_gid=a4TfHuh-zmidcVfVpUz6ww&_nc_ss=7a389&oh=00_Af33Y0NHBJRPRB1XAauK8naQOA6vlHhYiaSoDB1h1KuD2Q&oe=69E8BA85" alt="Masa Garden" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>Masa Garden สุขุมวิท 39</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(412 รีวิว)</span></p>
+                        <p class="location">📍 สุขุมวิท 39 · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>1,000฿-2,500฿</strong></span>
+                            <a href="MasaGarden.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">ร้านอาหาร / อิตาเลียน</span>
+                        <img src="https://scontent.fbkk22-4.fna.fbcdn.net/v/t39.30808-6/408493451_10159783101551659_6311539246383218702_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=ErNi4bVwy1AQ7kNvwGyDNtc&_nc_oc=AdrRJLEcs2ghjp-Do0x7E5pLAMQwahG6lERNrZFm6Zl9sIq9KxQX-mWk4dYWfpa_C1U&_nc_zt=23&_nc_ht=scontent.fbkk22-4.fna&_nc_gid=M50cXhYaMFXxLGAHKpYttw&_nc_ss=7a389&oh=00_Af32fDDxhWUI4IJYgrISzsm0aQNK_v9T1CMs6T0jiRxAlg&oe=69E8DDAD" alt="Cento Bangkok" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>Cento Bangkok</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(185 รีวิว)</span></p>
+                        <p class="location">📍 ศาลาแดง · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>1,000฿-2,500฿</strong></span>
+                            <a href="Cento.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">ร้านอาหาร / อาหารไทย</span>
+                        <img src="https://scontent.fbkk22-3.fna.fbcdn.net/v/t39.30808-6/435694449_728075702871694_5183237014027345264_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=5zpgtGRGGWIQ7kNvwFS-iAJ&_nc_oc=Adrrt1AWZLV_QLh_xNDLIIg0ZF1rzdty0L1kuh3E4xRm3kuw4hxjtDea_1Oxf3Iio2o&_nc_zt=23&_nc_ht=scontent.fbkk22-3.fna&_nc_gid=poPTNFD5CnhqPff7_OJUFA&_nc_ss=7a389&oh=00_Af0OZhdIHk2rkggnRodh9Cg-eHQSAdWu8SjSx8tXDOyHMg&oe=69E8C927" alt="อิ่มปลาเผา พรานนก" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>อิ่มปลาเผา พรานนก</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(520 รีวิว)</span></p>
+                        <p class="location">📍 พรานนก · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>200฿-500฿</strong></span>
+                            <a href="ImPlaPhao.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="cafe-lover" class="recommend-block">
+            <div class="block-header">
+                <h2>☕ คาเฟ่สายถ่ายรูป (Photogenic Cafe)</h2>
+                <p>มุมถ่ายรูปสวย กาแฟดี ขนมอร่อย เมมเบอรี่กล้องต้องเต็ม!</p>
+            </div>
+            <div class="card-grid">
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">คาเฟ่ลอฟท์</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDFJtY2QrLj0EuKV0G6l3ZEGbiWhSOzO5tKA&s" alt="SYDNY BAGELS" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>SYDNY (ซิดนีย์)</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(438 รีวิว)</span></p>
+                        <p class="location">📍 ตลิ่งชัน · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>100฿-400฿</strong></span>
+                            <a href="SYDNY BAGELS.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">คาเฟ่ & บรันช์</span>
+                        <img src="https://scontent.fbkk29-5.fna.fbcdn.net/v/t39.30808-6/288080287_527875072251879_6469014923406528317_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=WykMZx9Ey6kQ7kNvwGTJf9X&_nc_oc=AdowCXHn9bvyk3rWEIMxIzF0ns6NyN6RnQf_QStY_pIYhWDXwDi-LNoscF9Z9yI2kco&_nc_zt=23&_nc_ht=scontent.fbkk29-5.fna&_nc_gid=5fBfHXmJSfvVixt-CdNytQ&_nc_ss=7a389&oh=00_Af2dRQiR9HXThrRYxqpuNrtPms03_4XmUuH8W5Jkw1nvYg&oe=69E82DA8" alt="Goose Café" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>Goose Café (กูส คาเฟ่)</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(541 รีวิว)</span></p>
+                        <p class="location">📍 สุขุมวิท 71 · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>200฿-500฿</strong></span>
+                            <a href="GooseCafe.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">Specialty Coffee</span>
+                        <img src="https://scontent.fbkk29-7.fna.fbcdn.net/v/t39.30808-6/518227550_1367813384762784_1584091692206485892_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=Nbki8iy8j0YQ7kNvwE28jIa&_nc_oc=AdrlQ-6BSH5ZCN75TfWWRgdor0uNnpYCZua9e-avZAlOmluotq1BGBxp4Aex7GltY7s&_nc_zt=23&_nc_ht=scontent.fbkk29-7.fna&_nc_gid=VTDA9z2hMCocx17f9o2feQ&_nc_ss=7a389&oh=00_Af1vAkHYzvT6KUMQBBhCE6YZdOzW9Az1KYnMPUGZrt4xDg&oe=69E83A4F" alt="Coffee no.9" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>Coffee no.9 (อารีย์)</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(862 รีวิว)</span></p>
+                        <p class="location">📍 อารีย์ · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>60฿-150฿</strong></span>
+                            <a href="Coffeeno9.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">คาเฟ่</span>
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500" alt="So Am I Coffee & Bakery" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>So Am I Coffee & Bakery</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(297 รีวิว)</span></p>
+                        <p class="location">📍 กาญจนาภิเษก · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>100฿-200฿</strong></span>
+                            <a href="So Am I ️Coffee & Bakery.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card" data-cat="cafe">
+                    <div class="card-img-container">
+                        <span class="category-badge">คาเฟ่เก๋ๆ</span>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwerJlCoaGZV9u-eWmfFFPFtXStU8qbG3Sd3pnyIewSbygxLpwXSlxZ0KB6S2TAp3JTxzxLNTvS9Fh1Y6nGmv088DrMRb1Q6ui6dkIxZiv9rxGiPfMyKlsYexpzfxpC1zYWfxa4mPBaHMVKiy=s1360-w1360-h1020" alt="Hidden Bangkok" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>Hidden Bangkok Bistro</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(305 รีวิว)</span></p>
+                        <p class="location">📍 เทอดไท 26 · <span class="open-badge">เปิดแล้ว</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>100฿-200฿</strong></span>
+                            <a href="HiddenBangkok.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">คาเฟ่ / เบเกอรี</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiRYTkoDR0qBPWboqphxp4ckxRW80x7YMtcA&s" alt="Slow Butter BKK" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>Slow Butter BKK</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(350 รีวิว)</span></p>
+                        <p class="location">📍 หัวลำโพง · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>80฿-200฿</strong></span>
+                            <a href="SlowButter.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="buffet-worth" class="recommend-block">
+            <div class="block-header">
+                <h2>🥘 บุฟเฟต์สุดคุ้ม (Best Buffets)</h2>
+                <p>กินให้จุก คุ้มค่าทุกบาทที่จ่ายไป สายแข็งต้องลุย!</p>
+            </div>
+            <div class="card-grid">
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">บุฟเฟต์หมาล่า</span>
+                        <img src="https://scontent.fbkk29-3.fna.fbcdn.net/v/t39.30808-6/622378989_1533595541817125_7453831764267176174_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=YQa6BfHrracQ7kNvwHPZqFb&_nc_oc=AdoA6zlGg5DqZBS7cSSjYwAwCqUTOS2PYlnRzy1tm4iGH6yY-Fv0JzbcoU_tVwDT130&_nc_zt=23&_nc_ht=scontent.fbkk29-3.fna&_nc_gid=LsiYGYZjseQ1CySeS0kTwQ&_nc_ss=7a389&oh=00_Af3_1B3BCR9FYIxT0OvSj8KEa4C4tLF2Q2osmX55nhnqzQ&oe=69E8406B" alt="Hotpot Man" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>ฮอตพอตแมน (บางแค)</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(1.2k รีวิว)</span></p>
+                        <p class="location">📍 บางแค · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>299฿</strong></span>
+                            <a href="Hotpotman.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">บุฟเฟต์ซีฟู้ดส์</span>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwepnMFF-ll5Q6pcwInxyX6UN3IeQ6sTgZJAMafAuZnRfKXwDUCFsvM7lxzcRsgO3ntZrZJmN-xw_RNrHWkPz_axsuCdYy3-hToD8Q9V7oJUFM1q26M7fKni9o7ZQvbWF8wBPt0TCOVWlPDXs=w289-h312-n-k-no" alt="Mungkorn Seafood" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>มังกรซีฟู้ดส์ ราษฎร์บูรณะ</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(1.0k รีวิว)</span></p>
+                        <p class="location">📍 ราษฎร์บูรณะ · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>499฿</strong></span>
+                            <a href="Mungkorn Seafood.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">บุฟเฟต์ชาบู</span>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAGgS0n_94mhkhoz3IwgdU_WVkIyUH0mofYzSVc0o_yGAOtKyP5Bj55sZRmgK_FbMahECuSpePk5m1I_MEaut4jILrw5JT1n1hc6zMy12qc_5PL76VMp5wP6G_EY9NmKNRC4xBl8Eg=w289-h312-n-k-no" alt="Mr.Been Shabu" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>มิสเตอร์บีนชาบู ปิ่นเกล้า</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(340 รีวิว)</span></p>
+                        <p class="location">📍 ปิ่นเกล้า · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>289฿</strong></span>
+                            <a href="MrBeen.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">บุฟเฟต์นานาชาติ</span>
+                        <img src="https://cms.dmpcdn.com/ugcarticle/2025/09/05/48295950-8a0e-11f0-8ab5-df1650432d0e_webp_original.webp" alt="เจริญรุ่งเรือง" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>เจริญรุ่งเรือง บุฟเฟต์</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(1.3k รีวิว)</span></p>
+                        <p class="location">📍 พระราม 3 · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>900฿-1,500฿</strong></span>
+                            <a href="Charoen Rung Rueang.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">บุฟเฟต์ / สุกี้พรีเมียม</span>
+                        <img src="https://scontent.fbkk22-1.fna.fbcdn.net/v/t39.30808-6/472762014_926053019673148_4288679720353939618_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=53a332&_nc_ohc=YS3f2ej0dYAQ7kNvwHonaU7&_nc_oc=AdqRxtidN_-ebUUQelWIWiKzcBs9O6PU_ydQ5SX2Qo3AkVeq0wTSo-Z4v2DXbv3VgGY&_nc_zt=23&_nc_ht=scontent.fbkk22-1.fna&_nc_gid=5-YbTNaFK44jDkgt3OGOJA&_nc_ss=7a389&oh=00_Af3Q9S4V-GWxYBR2jde3lWME--2-WPf0A8R8P23K0cgwIg&oe=69E90282" alt="You & I Premium Suki" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>You & I Premium Suki</h3>
+                        <p class="rating">⭐⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(1.2k รีวิว)</span></p>
+                        <p class="location">📍 เดอะมอลล์บางแค · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>498฿-1,098฿</strong></span>
+                            <a href="YouAndI.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="card-img-container">
+                        <span class="category-badge">บุฟเฟต์ / หมูกระทะ</span>
+                        <img src="https://scontent.fbkk22-3.fna.fbcdn.net/v/t39.30808-6/472718222_1012744207548519_8921728709012239855_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=LERkGYl1nbwQ7kNvwGyA_jQ&_nc_oc=AdpwZ-hTFLksssQEiM3ypfJNauUb6OdWgal7VqIh-hY7DyZL1szd5Ir27cMbJ8qRLj0&_nc_zt=23&_nc_ht=scontent.fbkk22-3.fna&_nc_gid=jnMKcBZTpA-f5UtL39-TBw&_nc_ss=7a389&oh=00_Af3jfPdwPImzLWVCNF6J74ndUNKtBV18vaRKhhCPVSHM6g&oe=69E91538" alt="Bar B Q Resort" loading="lazy">
+                        <button class="wishlist-btn" title="บันทึก">🤍</button>
+                    </div>
+                    <div class="card-info">
+                        <h3>Bar B Q Resort (บางแค)</h3>
+                        <p class="rating">⭐⭐⭐⭐ <span style="color:var(--text-light);font-size:0.75rem">(2.3k รีวิว)</span></p>
+                        <p class="location">📍 เพชรเกษม บางแค · <span class="open-badge">เปิดอยู่</span></p>
+                        <div class="card-footer">
+                            <span class="price-tag">เริ่ม <strong>320฿ (Net)</strong></span>
+                            <a href="BarBQResort.html" class="btn-read">อ่านรีวิว</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-box">
+            <h3>📢 อยากให้เรารีวิวร้านไหน?</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted)">มีร้านในใจอยากให้เราไปพิสูจน์ความอร่อย ส่งพิกัดมาได้เลย!</p>
+            <button class="btn-read" style="width:100%; margin-top:15px; text-align: center;" onclick="openSuggestModal()">ส่งข้อมูลร้าน</button>
+        </div>
+    </aside>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Foodie Review</h3>
+            <p>รวมเด็ดๆ ย่านฝั่งธน โดยทีมงาน Foodie Review</p>
+        </div>
+        <div class="footer-section">
+            <h4>ติดตามเรา</h4>
+            <div class="social-links">
+                <a href="#">📘 Facebook</a>
+                <a href="#">📸 Instagram</a>
+                <a href="#">🎵 TikTok</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>ติดต่องาน</h4>
+            <p>📧 contact@FoodieReview.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 Foodie Review.
+    </div>
+</footer>
+
+<div id="suggestModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeSuggestModal()">&times;</span>
+        <h3 style="color: var(--primary); margin-bottom: 10px; font-size: 1.2rem;">📢 แนะนำร้านเด็ดให้เรา</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">บอกชื่อร้าน หรือแปะลิงก์พิกัดมาได้เลยค่ะ!</p>
+        
+        <input type="text" id="suggestInput" class="modal-input" placeholder="เช่น ร้านลับซอย 8, ลิงก์ Google Maps...">
+        
+        <button class="btn-read" style="width: 100%; padding: 10px; font-size: 0.9rem;" onclick="submitSuggestion()">ส่งข้อมูลให้ Foodie 🚀</button>
+    </div>
+</div>
+
+<script>
+// Dark Mode
+const toggle = document.getElementById('darkmode-toggle');
+const saved = localStorage.getItem('theme');
+if (saved === 'dark') { document.documentElement.setAttribute('data-theme','dark'); toggle.checked = true; }
+toggle.addEventListener('change', () => {
+    const t = toggle.checked ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem('theme', t);
+});
+
+// Javascript สำหรับเปลี่ยนปุ่ม Active ในแถบเมนูตามการ Scroll
+window.addEventListener('scroll', () => {
+    let current = '';
+    const sections = document.querySelectorAll('.recommend-block');
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 180) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('href') === `#${current}`) {
+            btn.classList.add('active');
+        }
+    });
+});
+
+// ================= MODAL JAVASCRIPT ================= //
+function openSuggestModal() {
+    document.getElementById('suggestModal').style.display = 'flex';
+}
+
+function closeSuggestModal() {
+    document.getElementById('suggestModal').style.display = 'none';
+}
+
+function submitSuggestion() {
+    const input = document.getElementById('suggestInput').value.trim();
+    if (input) {
+        alert('ขอบคุณที่แนะนำร้าน "' + input + '" เข้ามานะคะ! ทีมงาน Foodie จะรีบไปตามรอยความอร่อยแน่นอนค่ะ 🥰');
+        document.getElementById('suggestInput').value = ''; // เคลียร์ช่องพิมพ์
+        closeSuggestModal(); // ปิดหน้าต่าง
+    } else {
+        alert('อย่าลืมพิมพ์ชื่อร้านหรือแปะพิกัดให้เราน้าา 😉');
+    }
+}
+
+// ปิด Modal อัตโนมัติเมื่อคลิกพื้นที่ด้านนอกกล่อง
+window.onclick = function(event) {
+    const modal = document.getElementById('suggestModal');
+    if (event.target == modal) {
+        closeSuggestModal();
+    }
+}
+</script>
+
+</body>
+</html>
